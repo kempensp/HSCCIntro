@@ -14,6 +14,13 @@ router.post('/', function(req, res, next) {
   let num1=req.body.num1;
   let num2=req.body.num2;
   let usersum=Number(num1)+Number(num2);
+
+  //Display checkbox results
+  if (process.env.CONSOLE_DEBUG=="true") {
+    console.log(req.body.numconvert1);
+    console.log(req.body.numconvert2);
+  }
+
   res.render('formresults', {
     title: 'Sample Form Results',
     fn:firstname,
