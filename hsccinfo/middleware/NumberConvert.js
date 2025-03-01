@@ -18,7 +18,4 @@ ConvertDecToBin:function(decimal){
 } // End ConvertDecToBin function
 
 
-
-
-
 } //End module.exports
