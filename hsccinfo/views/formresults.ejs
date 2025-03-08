@@ -12,6 +12,19 @@
  <p> Name: <%= ln %>, <%= fn %> </p> 
  <p> Email: <%= em %> </p>
  <p> Total: <%= total %> </p>
+ <!-- We display the binary conversion results only if the binary checkbox is checked -->
+<% if (displaybin) { %>
+    Binary conversions:
+    <%= binnum1 %>
+    <%= binnum2 %>
+<% } %>
+
+ <!-- We display the hexadecimal conversion results only if the hex checkbox is checked -->
+ <% if (displayhex) { %>
+    Hexadecimal conversions:
+    <%= hexnum1 %>
+    <%= hexnum2 %>
+<% } %>
  
 
 
