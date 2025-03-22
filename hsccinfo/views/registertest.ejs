@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<!-- Include statement has head section -->
+<%- include('./partials/head') -%>
+
+<body>
+    <!-- Include navigation menu -->
+    <%- include('./partials/menu') -%>
+
+   <h1> Sample register form </h1>
+   <form name="SampleForm" action="/registertest" method="POST">
+      <label for="firstname"> First Name: </label> <input type="text" name="firstname" id="firstname" required>
+      <label for="lastname"> Last Name: </label> <input type="text" name="lastname" id="lastname" required> <br>
+      <label for="username"> Username </label> <input type="test" name="username" id="username" required> <br>
+      <label for="pwd"> Enter a number: </label> <input type="password" name="pwd" id="pwd" required>
+      <input type="submit" value="Submit form">
+
+   </form>
+
+</body>
+</html>
