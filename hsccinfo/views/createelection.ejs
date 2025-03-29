@@ -11,6 +11,17 @@
     <form name="ElectionForm" action="/createelection" method="POST">
         <label for="title">Title: </label>
         <input type="text" name="title" id="title">
+        <br>
+        <p>Select the type of election:
+            <input type="radio" name="type" id="irv" value="irv">
+            <label for="irv"> Instant Runoff </label>
+            <input type="radio" name="type" id="cpl" value="cpl">
+            <label for="cpl"> Head-to-Head Comparisons </label>
+            <input type="radio" name="type" id="fptp" value="fptp">
+            <label for="fptp"> First-Past-The-Post (plurality) </label>
+            <input type="radio" name="type" id="star" value="star">
+            <label for="star"> Star approval and runoff </label>
+        </p>
 
         <input type="submit" value="Submit form">
     </form>
