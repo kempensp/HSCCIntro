@@ -16,6 +16,7 @@ var formentryRouter = require('./routes/formentry');
 var registerTestRouter = require('./routes/registertest');
 var loginTestRouter = require('./routes/logintest');
 var electionMetaRouter = require('./routes/electionmeta');
+var createElectionRouter = require('./routes/createelection');
 // Setting up Express app
 var app = express();
 
@@ -37,9 +38,10 @@ app.use('/', indexRouter);  //Note that index router connects with /.
 app.use('/users', usersRouter);
 app.use('/bdpahistory', bdpahistoryRouter);
 app.use('/formentry', formentryRouter);
-app.use('/registertest', registerTestRouter);
 app.use('/electionmeta', electionMetaRouter);
+app.use('/registertest', registerTestRouter);
 app.use('/logintest', loginTestRouter);
+app.use('/createElection', createElectionRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

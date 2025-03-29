@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <!-- head partial gets included here -->
+  <%- include('./partials/head') -%> 
+
+  <body>
+    <!-- Include menu here -->
+    <%- include('./partials/menu') -%>
+
+    <h1> Create an election </h1>
+    <form name="ElectionForm" action="/createelection" method="POST">
+        <label for="title">Title: </label>
+        <input type="text" name="title" id="title">
+
+        <input type="submit" value="Submit form">
+    </form>
+
+  </body>
+</html>

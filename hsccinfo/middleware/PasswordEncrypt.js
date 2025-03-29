@@ -51,7 +51,7 @@ module.exports={
                 saltBuffer ||
                 crypto.getRandomValues(new Uint8Array(SALT_SIZE_BYTES));
 
-            console.log("SaltBuffer:",saltBuffer);
+            // console.log("SaltBuffer:",saltBuffer);
             // Convert our passwordBuffer into something WebCrypto understands:
             const plaintextKey = await crypto.subtle.importKey(
                 'raw', // We're working with a "raw" array of bytes
@@ -95,13 +95,15 @@ module.exports={
             // we'll need to turn our byte arrays into hex strings:
             const saltString = convertBufferToHex(saltBuffer);
             const keyString = convertBufferToHex(pbkdf2Buffer);
-            console.log("Salt=",saltString);
-            console.log("Key=",keyString);
+            //console.log("Salt=",saltString);
+            //console.log("Key=",keyString);
             return { keyString, saltString };
         };
 
         const { keyString, saltString } = await deriveKeyFromPassword(body.pwd, body);
-        console.log(keyString,saltString)
+        if (process.env.CONSOLE_DEBUG=="true"){
+            console.log(keyString,saltString)
+        }
         return {keyString,saltString}
     } //end function
 ,
@@ -156,7 +158,7 @@ module.exports={
                 saltBuffer ||
                 crypto.getRandomValues(new Uint8Array(SALT_SIZE_BYTES));
 
-            console.log("SaltBuffer:",saltBuffer);
+            //console.log("SaltBuffer:",saltBuffer);
             // Convert our passwordBuffer into something WebCrypto understands:
             const plaintextKey = await crypto.subtle.importKey(
                 'raw', // We're working with a "raw" array of bytes
@@ -200,8 +202,8 @@ module.exports={
             // we'll need to turn our byte arrays into hex strings:
             const saltString = convertBufferToHex(saltBuffer);
             const keyString = convertBufferToHex(pbkdf2Buffer);
-            console.log("Salt=",saltString);
-            console.log("Key=",keyString);
+            //console.log("Salt=",saltString);
+            //console.log("Key=",keyString);
             return { keyString, saltString };
         };
         
@@ -209,7 +211,9 @@ module.exports={
         var saltBuffer=convertHexToBuffer(salt);
         var password=body.pwd;
         const { keyString, saltString } = await deriveKeyFromPassword(password, body, saltBuffer);
-        console.log(keyString,saltString)
+        if (process.env.CONSOLE_DEBUG=="true"){
+            console.log(keyString,saltString)
+        }
         return {keyString,saltString}
     } //end function
 
