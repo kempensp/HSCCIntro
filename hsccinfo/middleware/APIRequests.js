@@ -38,13 +38,14 @@ module.exports = {
     const options = {
         method:"POST",
         headers: {
-            Authorization: `Bearer ${token}`  //These are forward ticks, not quotes!
+            Authorization: `Bearer ${token}` , //These are forward ticks, not quotes!
+            "content-type": "application/json"
             // Will we need content type?
         }
     }; //End Setting our headers...
 
     return new Promise((resolve,reject) => {
-        const req=http.request(url,options,res=>{
+        const req=https.request(url,options,res=>{
             let data = '';
             res.on('data', chunk => {
               data += chunk;
