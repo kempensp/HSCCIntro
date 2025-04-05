@@ -10,10 +10,10 @@
     <h1> Create an election </h1>
     <form name="ElectionForm" action="/createelection" method="POST">
         <label for="title">Title: </label>
-        <input type="text" name="title" id="title">
+        <input type="text" name="title" id="title" required>
         <br>
         <p>Select the type of election:
-            <input type="radio" name="type" id="irv" value="irv">
+            <input type="radio" name="type" id="irv" value="irv" checked>
             <label for="irv"> Instant Runoff </label>
             <input type="radio" name="type" id="cpl" value="cpl">
             <label for="cpl"> Head-to-Head Comparisons </label>
@@ -22,7 +22,57 @@
             <input type="radio" name="type" id="star" value="star">
             <label for="star"> Star approval and runoff </label>
         </p>
+        <label for="description">Description: </label>
+        <input type="text" name="description" id="description" size="50" required>
+        <br>
+        <p>Voting Options:</p>
+        <!-- Will need to address how many options we will need.  We'll set up one for now -->
+        <div id="optionsContainer">
+          <div id="optionsWrapper">
+            <input type="text" name="option1" id="option1" required>
+            <!-- <button class="removeButton">Remove Option</button> -->
+          </div>
+        </div>
+        
+        <!-- Button to add a field -->
+        <button id="addButton">Add Field</button>
 
+        <!-- Create Javascript code to add or remove options fields -->
+        <script>
+          document.getElementById('addButton').addEventListener('click',function(event){
+            event.preventDefault(); //prevents click the button from submitting the form
+            //alert('clicked add field button');
+            var inputContainer=document.getElementById('optionsContainer');
+            var newInputWrapper=document.createElement('div');
+            newInputWrapper.classList.add('optionsWrapper');
+
+
+            var newOption=document.createElement('input');
+            newOption.type='text';
+            newOption.id='option'+(inputContainer.children.length+1);
+            newOption.name='option'+(inputContainer.children.length+1);
+            newInputWrapper.appendChild(newOption);
+
+            var newButton = document.createElement('button');
+            newButton.textContent = 'Remove';
+            newButton.classList.add('removeButton');
+            newButton.addEventListener('click', function(event) {
+              event.preventDefault();
+              event.target.parentNode.remove();
+            });//END of Remove button event listener
+
+            newInputWrapper.appendChild(newButton);
+
+            inputContainer.appendChild(newInputWrapper);
+          }); //END OF EVENT LISTENER
+        </script>
+
+        <br>
+        <label for="openingtime"> Opening Date/Time (UTC) </label>
+        <input type="datetime-local" name="openingtime" id="openingtime" required>
+        <label for="closingtime"> Closing Date/Time (UTC) </label>
+        <input type="datetime-local" name="closingtime" id="closingtime" required>
+        <br>
         <input type="submit" value="Submit form">
     </form>
 
