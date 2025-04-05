@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <!-- head partial gets included here -->
+  <%- include('./partials/head') -%>
+  <body>
+    <!-- Include menu here -->
+    <%- include('./partials/menu') -%>
+
+    <h1> Election view information </h1>
+    <div class="table-responsive">
+        <table class="table table-hover">
+        <tr>
+            <th> Election Title </th>
+            <th> Election ID </th>
+            <th> Election Description </th>
+        </tr>
+        <%for (var result in ElectionsArray){%>
+            <tr>
+                <td> <%= ElectionsArray[result].title %> </td>
+        
+                <td> 
+                    
+                    <a href="/viewelection/<%= ElectionsArray[result].election_id %>"> 
+                    <%= ElectionsArray[result].election_id %> 
+                    </a> 
+                </td>
+                <td> <%= ElectionsArray[result].description %> </td>
+        
+        
+        
+        
+        
+            </tr>
+        
+        <%}%> <!-- to close out for loop-->
+        
+        
+        </table>
+        </div>
+
+  </body>
+</html>

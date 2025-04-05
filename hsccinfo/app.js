@@ -17,6 +17,7 @@ var registerTestRouter = require('./routes/registertest');
 var loginTestRouter = require('./routes/logintest');
 var electionMetaRouter = require('./routes/electionmeta');
 var createElectionRouter = require('./routes/createelection');
+var viewElectionRouter = require('./routes/viewelection');
 // Setting up Express app
 var app = express();
 
@@ -42,6 +43,7 @@ app.use('/electionmeta', electionMetaRouter);
 app.use('/registertest', registerTestRouter);
 app.use('/logintest', loginTestRouter);
 app.use('/createElection', createElectionRouter);
+app.use('/viewElection', viewElectionRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
