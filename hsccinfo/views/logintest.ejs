@@ -9,9 +9,21 @@
 
    <h1> Sample register form </h1>
    <form name="SampleForm" action="/logintest" method="POST">
-      <label for="username"> Username </label> <input type="test" name="username" id="username" required> <br>
-      <label for="salt"> Enter salt </label> <input type="test" name="salt" id="salt" required> <br>
-      <label for="pwd"> Enter a password: </label> <input type="password" name="pwd" id="pwd" required>
+      <div class="row">
+         <div class="col">
+            <label for="username"> Username </label> 
+            <input class="form-control" type="test" name="username" id="username" required>
+         </div>
+         <div class="col">
+            <label for="salt"> Enter salt </label> 
+            <input class="form-control" type="test" name="salt" id="salt" required>
+         </div>
+         <div class="col">
+            <label for="pwd"> Enter a password: </label> 
+            <input class="form-control" type="password" name="pwd" id="pwd" required>
+
+         </div>
+      </div>
       <input type="submit" value="Submit form">
 
    </form>

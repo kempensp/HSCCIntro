@@ -1,14 +1,32 @@
 <!-- This is our horizontal navbar -->
-<ul class="menu">
-    <li><a href="/"> <img src="images/bdpalogo.png" height="25">   </a></li>
-    <li><a href="/"> Home </a></li>
-    <li><a href="/bdpahistory"> BDPA History </a></li>
-    <li><a href="/formentry"> Sample Form </a></li>
-    <li><a href="/electionmeta"> Election Data </a></li>
-    <li><a href="/registertest"> Test Register </a></li>
-    <li><a href="/logintest"> Test Login </a></li>
-    <li><a href="/createelection"> Create Election </a></li>
-    <li><a href="/viewelection"> View Election </a></li>
-  </ul>
-  <!-- End navbar -->
-  <br><br><br>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <div class="container-fluid">
+    <!-- Logo/branding -->
+    <a class="navbar-brand" href="/">
+      <img src="/images/bdpalogo.png" alt="Avatar Logo" style="width:40px;" class="rounded-pill"> 
+    </a>
+    <!-- Collapsible menu button -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Collapsible Navigation -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="/"> Home </a></li>
+        <li class="nav-item"><a class="nav-link" href="/bdpahistory"> BDPA History </a></li>
+        <li class="nav-item"><a class="nav-link" href="/formentry"> Sample Form </a></li>
+        <li class="nav-item"><a class="nav-link" href="/registertest"> Test Register </a></li>
+        <li class="nav-item"><a class="nav-link" href="/logintest"> Test Login </a></li>
+        <!-- dropdown for elections-->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Elections Data</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/electionmeta"> Overall Data</a></li>
+            <li><a class="dropdown-item" href="/createelection"> Create an Election</a></li>
+            <li><a class="dropdown-item" href="/viewelection"> View Elections list </a></li>
+          </ul>
+        </li> <!-- End dropdown for elections-->
+      </ul>
+    </div> <!--collapsibleNavbar -->
+  </div> <!--Container-->
+</nav>

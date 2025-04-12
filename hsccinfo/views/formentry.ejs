@@ -9,17 +9,36 @@
 
    <h1> Sample data entry </h1>
    <form name="SampleForm" action="/formentry" method="POST">
-      <label for="firstname"> First Name: </label> <input type="text" name="firstname" id="firstname" required>
-      <label for="lastname"> Last Name: </label> <input type="text" name="lastname" id="lastname" required> <br>
-      <label for="email1"> Email: </label> <input type="email" name="email1" id="email1" required> <br>
-      <label for="num1"> Enter a number: </label> <input type="number" name="num1" id="num1" required>
-      <label for="num2"> Enter another number: </label> <input type="number" name="num2" id="num2" required>
-      
+      <div class="row">
+         <div class="col">
+      <label for="firstname"> First Name: </label> <input type="text" class="form-control" name="firstname" id="firstname" required>
+         </div>
+         <div class="col">
+         <label for="lastname"> Last Name: </label> <input type="text"  class="form-control" name="lastname" id="lastname" required> 
+          </div>   
+      </div>
+      <div class="row">
+         <div class="col">
+            <label for="email1"> Email: </label> <input type="email" class="form-control" name="email1" id="email1" required> 
+         </div>
+      </div>
+      <div class="row">
+         <div class="col">
+      <label for="num1"> Enter a number: </label> <input class="form-control" type="number" name="num1" id="num1" required>
+      </div>
+      <div class="col">
+      <label for="num2"> Enter another number: </label> <input class="form-control" type="number" name="num2" id="num2" required>
+       </div>
+       </div>
       <br>
-      <input type="checkbox" name="numconvert1" id="numconvert1" value="bin">
-      <label for="numconvert1"> Show in binary </label>
-      <input type="checkbox" name="numconvert2" id="numconvert2" value="hex">
-      <label for="numconvert2"> Show in hexadecimal </label>
+      <div class="form-check">
+      <input class="form-check-input" type="checkbox" name="numconvert1" id="numconvert1" value="bin">
+      <label class="form-check-label" for="numconvert1"> Show in binary </label>
+   </div> 
+   <div class="form-check">
+      <input class="form-check-input" type="checkbox" name="numconvert2" id="numconvert2" value="hex">
+      <label class="form-check-label" for="numconvert2"> Show in hexadecimal </label>
+      </div>
 
       <input type="submit" value="Submit form">
 
