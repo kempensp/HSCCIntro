@@ -9,12 +9,15 @@
     <h1> Election view information </h1>
     <div class="table-responsive">
         <table class="table table-hover">
+            <!-- First row is for table heading (tr tag with th tag nested) -->
         <tr>
             <th> Election Title </th>
             <th> Election ID </th>
             <th> Election Description </th>
         </tr>
-        <%for (var result in ElectionsArray){%>
+
+        <!-- Create one row for each election in our ElectionsArray using a for loop -->
+        <%for (var result in ElectionsArray) {%>
             <tr>
                 <td> <%= ElectionsArray[result].title %> </td>
         
@@ -24,6 +27,7 @@
                     <%= ElectionsArray[result].election_id %> 
                     </a> 
                 </td>
+                
                 <td> <%= ElectionsArray[result].description %> </td>
         
         

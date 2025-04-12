@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <!-- head partial gets included here -->
+  <%- include('./partials/head') -%>
+  <body>
+    <!-- Include menu here -->
+    <%- include('./partials/menu') -%>
+
+    <h1> Election information </h1>
+    <h2> Election ID: <%= Electiondata.election_id %> </h2>
+    <h2> Title: <%= Electiondata.title %> </h2>
+<!-- Express the type with abbreviation and short title in words using switch statement -->
+    <% var typeinwords="" %> 
+    <% if (Electiondata.type=="irv") { typeinwords= "Instant runoff"} %>
+    <% if (Electiondata.type=="cpl") {typeinwords="Head-to-Head Comparisons"} %>
+    <% if (Electiondata.type=="star") {typeinwords="Star approval and runoff"} %> 
+    <% if (Electiondata.type=="fptp") {typeinwords="First-Past-The-Post (plurality)"} %>
+
+
+    <h2> Type: <%= Electiondata.type %>, <%= typeinwords %>  </h2>
+    <h3> Description: <%= Electiondata.description %> </h3>
+    <h3> Candidates: <%= Electiondata.options %> </h3>
+    <h3> Is it ours? <%= Electiondata.owned %> </h3>
+    <h3> Is it deleted? <%= Electiondata.deleted %> </h3>
+    <h3> Create at:  <%= new Date(Electiondata.createdAt) %> </h3>
+    <h3> Opens at: <%= new Date(Electiondata.opensAt) %> </h3>
+    <h3> Closes at: <%= new Date(Electiondata.closesAt) %> </h3>
+
+
+
+  </body>
+</html>
+
+
+
+
+
+
+
