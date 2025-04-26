@@ -11,13 +11,6 @@ module.exports={
             deprecationErrors: true,
             }
         });
-        return client
+        return client;
     } // End CreateMongoClient function
- 
-    
-
-    
-    
-    
-    
-    } //End module.exports
+} //End module.exports
