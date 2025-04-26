@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const APIRequests=require("../middleware/APIRequests");
+const CreateClient=require("../middleware/MongoClient");
 
 // GET Electionsmeta page.
 router.get('/', function(req, res, next) {
@@ -21,6 +22,29 @@ router.get('/', function(req, res, next) {
             var upcomingElections=data.info.upcomingElections;
             var openElections=data.info.openElections;
             var closedElections=data.info.closedElections;
+            // Set up connection to MongoDB
+            const client =CreateClient.CreateMongoClient();
+            async function run() {
+                try {
+                    // Connect the client to the server	(optional starting in v4.7)
+                    await client.connect();
+                    // Send a ping to confirm a successful connection
+                    await client.db("admin").command({ ping: 1 });
+                    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+                    const db = client.db('Elections24');
+                    const collection = db.collection('ElectionMeta');
+                    const update= await collection.updateOne( { title: "ElectionStats" }, { $set: 
+                        { upcomingElections: upcomingElections,
+                            openElections:openElections,
+                            closedElections:closedElections } } ) 
+                } finally {
+                    // Ensures that the client will close when you finish/error
+                    await client.close();
+                }
+            }
+            run().catch(console.dir);
+
+
             res.render('electionmeta', {
                 title: 'Elections global data',
                 upcomingElections: upcomingElections,
