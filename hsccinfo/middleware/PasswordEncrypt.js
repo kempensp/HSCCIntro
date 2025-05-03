@@ -202,8 +202,8 @@ module.exports={
             // we'll need to turn our byte arrays into hex strings:
             const saltString = convertBufferToHex(saltBuffer);
             const keyString = convertBufferToHex(pbkdf2Buffer);
-            //console.log("Salt=",saltString);
-            //console.log("Key=",keyString);
+            console.log("Salt=",saltString);
+            console.log("Key=",keyString);
             return { keyString, saltString };
         };
         
