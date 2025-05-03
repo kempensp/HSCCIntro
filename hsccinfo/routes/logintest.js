@@ -5,13 +5,12 @@ const Encrypter=require("../middleware/PasswordEncrypt");
 const MongoClient=require("../middleware/MongoClient");
 /* GET register page. */
 router.get('/', function(req, res, next) {
-  res.render('logintest', { title: 'Test Login Page' });
+  res.render('logintest', { title: 'Test Login Page' ,message:'' });
 });
 
 // POST register form
 router.post('/', function(req, res, next) {
   let name=req.body.username;
-  let salt=req.body.salt;
   let pwd=req.body.pwd;
   const client=MongoClient.CreateMongoClient();
   async function run() {
@@ -22,16 +21,28 @@ router.post('/', function(req, res, next) {
         const db = client.db('Elections24');
         const collection = db.collection('Users');
         const result= await collection.findOne( { username: name } )
-        salt=result.salt
-        key=result.key
-        if (process.env.CONSOLE_DEBUG){
-          console.log(result)
-          //console.log(salt)
-          //console.log(key)
+        console.log(result)
+        if (result===null){
+          res.render('logintest',{title:'Login failed',message:'Login and password not found'})
         }
-        var {keyString,saltString}=await Encrypter.TestPassword(req.body,salt)
-        if (process.env.CONSOLE_DEBUG){
-           console.log(keyString,saltString)
+        else {
+          salt=result.salt
+          key=result.key
+          if (process.env.CONSOLE_DEBUG){
+            console.log(result)
+            //console.log(salt)
+            //console.log(key)
+          }
+          var {keyString,saltString}=await Encrypter.TestPassword(req.body,salt)
+          if (process.env.CONSOLE_DEBUG){
+             console.log(keyString,saltString)
+          }
+          if (keyString==key){
+            res.render('logintest',{title:"Successful login",message:"Welcome "+name})
+          }
+          else{
+            res.render('logintest',{title:'Login failed',message:'Login and password not found'})
+          }
         }
     } finally {
         // Ensures that the client will close when you finish/error
@@ -42,10 +53,7 @@ router.post('/', function(req, res, next) {
   console.log("Test password");
   
   
-  res.render('logintest', {
-    title: 'Login test results',
 
-  });
 });
 
 module.exports = router;

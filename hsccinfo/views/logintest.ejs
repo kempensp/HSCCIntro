@@ -7,17 +7,14 @@
     <!-- Include navigation menu -->
     <%- include('./partials/menu') -%>
 
-   <h1> Sample register form </h1>
+   <h1> Sample login form </h1>
    <form name="SampleForm" action="/logintest" method="POST">
       <div class="row">
          <div class="col">
             <label for="username"> Username </label> 
             <input class="form-control" type="test" name="username" id="username" required>
          </div>
-         <div class="col">
-            <label for="salt"> Enter salt </label> 
-            <input class="form-control" type="test" name="salt" id="salt" required>
-         </div>
+
          <div class="col">
             <label for="pwd"> Enter a password: </label> 
             <input class="form-control" type="password" name="pwd" id="pwd" required>
@@ -27,6 +24,7 @@
       <input type="submit" value="Submit form">
 
    </form>
+   <%= message %>
 
 </body>
 </html>
