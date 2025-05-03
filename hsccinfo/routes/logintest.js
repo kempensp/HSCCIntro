@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 });
 
 // POST register form
-router.post('/', function(req, res, next) {
+router.post('/', async(req, res, next) => {
   let name=req.body.username;
   let salt=req.body.salt;
   let pwd=req.body.pwd;
@@ -22,8 +22,16 @@ router.post('/', function(req, res, next) {
         const db = client.db('Elections24');
         const collection = db.collection('Users');
         const result= await collection.findOne( { username: name } )
+        salt=result.salt
+        key=result.key
         if (process.env.CONSOLE_DEBUG){
           console.log(result)
+          //console.log(salt)
+          //console.log(key)
+        }
+        var {keyString,saltString}=await Encrypter.TestPassword(req.body,salt)
+        if (process.env.CONSOLE_DEBUG){
+           console.log(keyString,saltString)
         }
     } finally {
         // Ensures that the client will close when you finish/error
@@ -32,13 +40,10 @@ router.post('/', function(req, res, next) {
   }
   run().catch(console.dir);
   console.log("Test password");
-  var {keyString,saltString}=Encrypter.TestPassword(req.body,salt)
-  if (process.env.CONSOLE_DEBUG){
-    console.log(keyString,saltString)
-  }
+  
   
   res.render('logintest', {
-    title: 'Login Results',
+    title: 'Login test results',
 
   });
 });

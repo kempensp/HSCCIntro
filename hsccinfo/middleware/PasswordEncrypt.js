@@ -202,8 +202,8 @@ module.exports={
             // we'll need to turn our byte arrays into hex strings:
             const saltString = convertBufferToHex(saltBuffer);
             const keyString = convertBufferToHex(pbkdf2Buffer);
-            console.log("Salt=",saltString);
-            console.log("Key=",keyString);
+            //console.log("Salt=",saltString);
+            //console.log("Key=",keyString);
             return { keyString, saltString };
         };
         
@@ -212,7 +212,7 @@ module.exports={
         var password=body.pwd;
         const { keyString, saltString } = await deriveKeyFromPassword(password, body, saltBuffer);
         if (process.env.CONSOLE_DEBUG=="true"){
-            console.log(keyString,saltString)
+            //console.log(keyString,saltString)
         }
         return {keyString,saltString}
     } //end function
