@@ -24,11 +24,94 @@
       <label for="username"> Username </label> 
       <input class="form-control" type="text" name="username" id="username" required> 
    </div>
+
+   <div class="col">
+      <label for="email"> Email </label>
+      <input class="form-control" type="email" name="email" id="email" required>
+   </div>
+
    <div class="col">
       <label for="pwd"> Create a password: </label>
       <input class="form-control" type="password" name="pwd" id="pwd" required>
    </div>
 </div>
+
+<div class="row">
+  <div class="col">
+    <label for="address"> Street address</label>
+    <input class="form-control" type="text" name="address" id="address" required>
+  </div>
+
+  <div class="col">
+    <label for="city"> City </label>
+    <input class="form-control" type="text" name="city" id="city" required>
+  </div>
+
+  <div class="col">
+   <label for='state'> State </label>
+   <select class="form-select" name="state" id="state" required>
+      <option>AL</option>
+<option>AK</option>
+<option>AZ</option>
+<option>AR</option>
+<option>CA</option>
+<option>CO</option>
+<option>CT</option>
+<option>DC</option>
+<option>DE</option>
+<option>FL</option>
+<option>GA</option>
+<option>HI</option>
+<option>ID</option>
+<option>IL</option>
+<option>IN</option>
+<option>IA</option>
+<option>KS</option>
+<option>KY</option>
+<option>LA</option>
+<option>ME</option>
+<option>MD</option>
+<option>MA</option>
+<option>MI</option>
+<option>MN</option>
+<option>MS</option>
+<option>MO</option>
+<option>MT</option>
+<option>NE</option>
+<option>NV</option>
+<option>NH</option>
+<option>NJ</option>
+<option>NM</option>
+<option>NY</option>
+<option>NC</option>
+<option>ND</option>
+<option>OH</option>
+<option>OK</option>
+<option>OR</option>
+<option>PA</option>
+<option>PR</option>
+<option>RI</option>
+<option>SC</option>
+<option>SD</option>
+<option>TN</option>
+<option>TX</option>
+<option>UT</option>
+<option>VT</option>
+<option>VA</option>
+<option>WA</option>
+<option>WV</option>
+<option>WI</option>
+<option>WY</option>
+   </select>
+  </div>
+
+<div class="col">
+  <label for="zip"> ZIP </label>
+  <input class="form-control" type="text" id="zip" name="zip" pattern="\d{5}(-\d{4})?" placeholder="12345 or 12345-6789" required>
+</div>
+
+</div>
+
       <input type="submit" value="Submit form">
 
    </form>
