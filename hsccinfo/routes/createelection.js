@@ -1,13 +1,17 @@
 var express = require('express');
 var router = express.Router();
 const APIRequests=require("../middleware/APIRequests");
+const auth=require("../middleware/verifyToken");
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  if (process.env.CONSOLE_DEBUG=="true"){
-    console.log("Debugging enabled!");
+router.get('/', auth, function(req, res, next) {
+  if (res.locals.role && ((res.locals.role=="super") || (res.locals.role=="administrator")))
+  {
+    res.render('createelection', { title: 'Create an Election' });
   }
-  res.render('createelection', { title: 'Create an Election' });
+  else{
+     res.render('logintest', { title: 'Please log in',message:'You need to log in to access page' });
+  }
 });
 
 router.post('/', function(req, res, next) {
