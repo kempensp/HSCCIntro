@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var jwt=require('jsonwebtoken');
 
 const Encrypter=require("../middleware/PasswordEncrypt");
 const MongoClient=require("../middleware/MongoClient");
@@ -38,6 +39,17 @@ router.post('/', function(req, res, next) {
              console.log(keyString,saltString)
           }
           if (keyString==key){
+            global.user_id=result._id
+            global.role=result.role
+            var token=jwt.sign(
+              {
+                id:global.user_id,role:global.role,name:name
+              }, process.env.BEARER_TOKEN, {expiresIn: 86400000}
+            )
+            if (process.env.CONSOLE_DEBUG){
+              console.log(token)
+            }
+            global.userToken=token
             res.render('logintest',{title:"Successful login",message:"Welcome "+name})
           }
           else{
