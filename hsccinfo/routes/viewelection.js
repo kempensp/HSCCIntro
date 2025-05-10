@@ -22,13 +22,13 @@ router.get('/', function(req, res, next) {
             var Elections=data.elections;
             res.render('viewelection', {
                 title: 'Elections list data',
-                ElectionsArray: Elections,
+                ElectionsArray: Elections,username: res.locals.name, role: res.locals.role
             })
         } // closes if statement
 
         else{
             res.render('error', {title: 'Elections call failed',
-            message: data.error,
+            message: data.error,username: res.locals.name, role: res.locals.role
             });
         }
     }) // data then component
@@ -53,13 +53,13 @@ router.get('/:election_id', function(req, res, next) {
             var Election=data.election;
             res.render('viewelectionsingle', {
                 title: 'Election information',
-                Electiondata: Election,
+                Electiondata: Election,username: res.locals.name, role: res.locals.role
             })
         } // closes if statement
 
         else{
             res.render('error', {title: 'Elections call failed',
-            message: data.error,
+            message: data.error,username: res.locals.name, role: res.locals.role
             });
         }
     }) // data then component

@@ -51,13 +51,14 @@ router.get('/', function(req, res, next) {
                 title: 'Elections global data',
                 upcomingElections: upcomingElections,
                 openElections: openElections,
-                closedElections: closedElections
+                closedElections: closedElections,
+                username: res.locals.name, role: res.locals.role
             })
         } // closes if statement
 
         else{
             res.render('error', {title: 'Stats call failed',
-            message: data.error,
+            message: data.error,username: res.locals.name, role: res.locals.role
             });
         }
     }) // data then component

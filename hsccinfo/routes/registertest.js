@@ -9,7 +9,7 @@ const MongoClient=require("../middleware/MongoClient");
 
 /* GET register page. */
 router.get('/', function(req, res, next) {
-  res.render('registertest', { title: 'Test Registration Page',message:'' });
+  res.render('registertest', { title: 'Test Registration Page',message:'',username: res.locals.name, role: res.locals.role });
 });
 
 // POST register form
@@ -42,10 +42,10 @@ router.post('/', function(req, res, next) {
               lastLoginTime:"",
               pwdupdated:true
              })
-             res.render('registertest',{title:'Registration success',message:"User added successfully"})
+             res.render('registertest',{title:'Registration success',message:"User added successfully",username: res.locals.name, role: res.locals.role})
         }
           else{
-            res.render('registertest',{title:'Registration failed',message:'Username already exists'})
+            res.render('registertest',{title:'Registration failed',message:'Username already exists',username: res.locals.name, role: res.locals.role})
           }
       
       } finally {

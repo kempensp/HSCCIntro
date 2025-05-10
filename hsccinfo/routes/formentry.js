@@ -7,7 +7,7 @@ const Converter=require("../middleware/NumberConvert");
 
 /* GET formentry page. */
 router.get('/', function(req, res, next) {
-  res.render('formentry', { title: 'Sample Form Entry' });
+  res.render('formentry', { title: 'Sample Form Entry',username: res.locals.name, role: res.locals.role });
 });
 
 // POST formentry form
@@ -44,7 +44,8 @@ router.post('/', function(req, res, next) {
     binnum2:binresult2,
     displayhex:req.body.numconvert2,
     hexnum1:hexresult1,
-    hexnum2:hexresult2
+    hexnum2:hexresult2,
+    username: res.locals.name, role: res.locals.role
   });
 });
 

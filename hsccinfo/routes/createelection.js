@@ -7,10 +7,10 @@ const auth=require("../middleware/verifyToken");
 router.get('/', auth, function(req, res, next) {
   if (res.locals.role && ((res.locals.role=="super") || (res.locals.role=="administrator")))
   {
-    res.render('createelection', { title: 'Create an Election' });
+    res.render('createelection', { title: 'Create an Election', username: res.locals.name, role: res.locals.role });
   }
   else{
-     res.render('logintest', { title: 'Please log in',message:'You need to log in to access page' });
+     res.render('logintest', { title: 'Please log in',message:'You need to log in to access page',username: res.locals.name, role: res.locals.role });
   }
 });
 
@@ -74,12 +74,13 @@ router.post('/', function(req, res, next) {
             
             if (data.success){
                 
-              res.render('createelection', { title: 'Created an Election Successfully' });
+              res.render('createelection', { title: 'Created an Election Successfully',username: res.locals.name, role: res.locals.role });
             } // closes if statement
     
             else{
                 res.render('error', {title: 'Election post failed',
                 message: data.error,
+                username: res.locals.name, role: res.locals.role
                 });
             }
         }) // data then component

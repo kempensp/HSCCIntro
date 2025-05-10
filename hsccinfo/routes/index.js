@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
   if (process.env.CONSOLE_DEBUG=="true"){
     console.log("Debugging enabled!");
   }
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Express',username: res.locals.name, role: res.locals.role });
 });
 //Gratuitous comment
 module.exports = router;

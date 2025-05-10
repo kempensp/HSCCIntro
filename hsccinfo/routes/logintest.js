@@ -8,7 +8,7 @@ const Encrypter=require("../middleware/PasswordEncrypt");
 const MongoClient=require("../middleware/MongoClient");
 /* GET register page. */
 router.get('/', function(req, res, next) {
-  res.render('logintest', { title: 'Test Login Page' ,message:'' });
+  res.render('logintest', { title: 'Test Login Page' ,message:'',username: res.locals.name, role: res.locals.role });
 });
 
 // POST register form
@@ -26,7 +26,7 @@ router.post('/', function(req, res, next) {
         const result= await collection.findOne( { username: name } )
         console.log(result)
         if (result===null){
-          res.render('logintest',{title:'Login failed',message:'Login and password not found'})
+          res.render('logintest',{title:'Login failed',message:'Login and password not found',username: res.locals.name, role: res.locals.role})
         }
         else {
           salt=result.salt
@@ -52,10 +52,10 @@ router.post('/', function(req, res, next) {
               console.log(token)
             }
             global.userToken=token
-            res.render('logintest',{title:"Successful login",message:"Welcome "+name})
+            res.render('logintest',{title:"Successful login",message:"Welcome "+name,username: res.locals.name, role: res.locals.role})
           }
           else{
-            res.render('logintest',{title:'Login failed',message:'Login and password not found'})
+            res.render('logintest',{title:'Login failed',message:'Login and password not found',username: res.locals.name, role: res.locals.role})
           }
         }
     } finally {
