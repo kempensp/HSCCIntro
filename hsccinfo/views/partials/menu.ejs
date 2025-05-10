@@ -15,24 +15,33 @@
         <li class="nav-item"><a class="nav-link" href="/"> Home </a></li>
         <li class="nav-item"><a class="nav-link" href="/bdpahistory"> BDPA History </a></li>
         <li class="nav-item"><a class="nav-link" href="/formentry"> Sample Form </a></li>
-        <li class="nav-item"><a class="nav-link" href="/registertest"> Test Register </a></li>
 
+        <% if ((role== 'guest') || (role== 'super') || (role== 'administrator')) { %>
+        <li class="nav-item"><a class="nav-link" href="/registertest"> Test Register </a></li>
+        <% } %>
+        
         <% if (role!= 'guest') { %>
-          <li class="nav-item"><a class="nav-link" href="/logout"> Logout</li>
+          <li class="nav-item"><a class="nav-link" href="/logout"> Logout</a></li>
             <% } %>
         <% if (role== 'guest') { %>
         <li class="nav-item"><a class="nav-link" href="/logintest"> Test Login </a></li>
         <% } %>
-        
+
         <!-- dropdown for elections-->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Elections Data</a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/electionmeta"> Overall Data</a></li>
+
+        <% if ((role== 'administrator') || (role== 'super')) { %>          
             <li><a class="dropdown-item" href="/createelection"> Create an Election</a></li>
+            <% } %>
             <li><a class="dropdown-item" href="/viewelection"> View Elections list </a></li>
           </ul>
         </li> <!-- End dropdown for elections-->
+        <% if (typeof name !== 'undefined') { %>
+          Hello, <%= name %>
+        <% } %>
       </ul>
     </div> <!--collapsibleNavbar -->
   </div> <!--Container-->
