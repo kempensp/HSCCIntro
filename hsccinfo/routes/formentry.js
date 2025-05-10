@@ -6,12 +6,12 @@ const auth=require("../middleware/verifyToken");
 const Converter=require("../middleware/NumberConvert");
 
 /* GET formentry page. */
-router.get('/', function(req, res, next) {
+router.get('/',auth, function(req, res, next) {
   res.render('formentry', { title: 'Sample Form Entry',username: res.locals.name, role: res.locals.role });
 });
 
 // POST formentry form
-router.post('/', function(req, res, next) {
+router.post('/',auth,function(req, res, next) {
   let firstname=req.body.firstname;
   let lastname=req.body.lastname;
   let email=req.body.email1;

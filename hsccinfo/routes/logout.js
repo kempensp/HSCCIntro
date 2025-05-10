@@ -6,6 +6,7 @@ const auth = require("../middleware/verifyToken");
 router.get('/', auth, function(req, res, next) {
     global.userToken=null;
     req.session=null;  //This may risk removing session data we want to keep, be careful
+    res.locals=null;
     res.redirect('/');  //Redirect to the index route and view
   });
 

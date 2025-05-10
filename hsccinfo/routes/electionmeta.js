@@ -6,7 +6,7 @@ const auth=require("../middleware/verifyToken");
 
 
 // GET Electionsmeta page.
-router.get('/', function(req, res, next) {
+router.get('/', auth, function(req, res, next) {
 
     const url = 'https://elections-cpl.api.hscc.bdpa.org/v1/info'
     const token = process.env.BEARER_TOKEN;

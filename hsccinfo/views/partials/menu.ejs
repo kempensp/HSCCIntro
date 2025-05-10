@@ -16,7 +16,14 @@
         <li class="nav-item"><a class="nav-link" href="/bdpahistory"> BDPA History </a></li>
         <li class="nav-item"><a class="nav-link" href="/formentry"> Sample Form </a></li>
         <li class="nav-item"><a class="nav-link" href="/registertest"> Test Register </a></li>
+
+        <% if (role!= 'guest') { %>
+          <li class="nav-item"><a class="nav-link" href="/logout"> Logout</li>
+            <% } %>
+        <% if (role== 'guest') { %>
         <li class="nav-item"><a class="nav-link" href="/logintest"> Test Login </a></li>
+        <% } %>
+        
         <!-- dropdown for elections-->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Elections Data</a>

@@ -7,12 +7,12 @@ const auth=require("../middleware/verifyToken");
 const Encrypter=require("../middleware/PasswordEncrypt");
 const MongoClient=require("../middleware/MongoClient");
 /* GET register page. */
-router.get('/', function(req, res, next) {
+router.get('/', auth,function(req, res, next) {
   res.render('logintest', { title: 'Test Login Page' ,message:'',username: res.locals.name, role: res.locals.role });
 });
 
 // POST register form
-router.post('/', function(req, res, next) {
+router.post('/', auth,function(req, res, next) {
   let name=req.body.username;
   let pwd=req.body.pwd;
   const client=MongoClient.CreateMongoClient();

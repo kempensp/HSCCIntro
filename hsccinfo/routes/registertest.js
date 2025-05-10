@@ -8,12 +8,12 @@ const MongoClient=require("../middleware/MongoClient");
 
 
 /* GET register page. */
-router.get('/', function(req, res, next) {
+router.get('/', auth,function(req, res, next) {
   res.render('registertest', { title: 'Test Registration Page',message:'',username: res.locals.name, role: res.locals.role });
 });
 
 // POST register form
-router.post('/', function(req, res, next) {
+router.post('/', auth,function(req, res, next) {
   let name=req.body.username;
   const client=MongoClient.CreateMongoClient();
   let pwd=req.body.pwd;

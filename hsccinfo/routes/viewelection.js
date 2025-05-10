@@ -5,7 +5,7 @@ const auth=require("../middleware/verifyToken");
 
 
 // GET viewelection general page.
-router.get('/', function(req, res, next) {
+router.get('/', auth,function(req, res, next) {
 
     const url = 'https://elections-cpl.api.hscc.bdpa.org/v1/elections'
     const token = process.env.BEARER_TOKEN;
@@ -36,7 +36,7 @@ router.get('/', function(req, res, next) {
 });
 
 // GET viewelection route for a specific election given its id
-router.get('/:election_id', function(req, res, next) {
+router.get('/:election_id',auth, function(req, res, next) {
 
     const url = 'https://elections-cpl.api.hscc.bdpa.org/v1/elections/' + req.params.election_id
     const token = process.env.BEARER_TOKEN;

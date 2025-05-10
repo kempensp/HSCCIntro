@@ -14,7 +14,7 @@ router.get('/', auth, function(req, res, next) {
   }
 });
 
-router.post('/', function(req, res, next) {
+router.post('/', auth, function(req, res, next) {
     if (process.env.CONSOLE_DEBUG=="true"){
       console.log(req.body);
       console.log(req.body.openingtime);
