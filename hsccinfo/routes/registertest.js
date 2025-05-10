@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+const auth=require("../middleware/verifyToken");
+
 
 const Encrypter=require("../middleware/PasswordEncrypt");
 const MongoClient=require("../middleware/MongoClient");

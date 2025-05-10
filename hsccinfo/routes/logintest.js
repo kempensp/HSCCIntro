@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var jwt=require('jsonwebtoken');
+const auth=require("../middleware/verifyToken");
+
 
 const Encrypter=require("../middleware/PasswordEncrypt");
 const MongoClient=require("../middleware/MongoClient");
