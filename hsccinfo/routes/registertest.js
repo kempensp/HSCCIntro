@@ -38,8 +38,8 @@ router.post('/', auth,function(req, res, next) {
               deleted:false,
               key:keyString,
               salt:saltString,
-              lastIP:"",
-              lastLoginTime:"",
+              lastIP:[],
+              lastLoginTime:[],
               pwdupdated:true
              })
              res.render('registertest',{title:'Registration success',message:"User added successfully",username: res.locals.name, role: res.locals.role})

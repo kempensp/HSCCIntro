@@ -50,8 +50,20 @@ router.post('/', auth,function(req, res, next) {
             )
             if (process.env.CONSOLE_DEBUG){
               console.log(token)
+              console.log(req.ip)
+              const currentTime = new Date();
+              console.log(currentTime);
+              console.log(`Current time is: ${currentTime.toLocaleString()}`);
             }
             global.userToken=token
+            var IParray=result.lastIP
+            IParray.unshift(req.ip)
+            IParray=IParray.slice(0, 5);
+            var loginTimearray=result.lastLoginTime
+            loginTimearray.unshift(new Date())
+            loginTimearray=loginTimearray.slice(0,5)
+
+            const updateresult=await collection.updateOne({username:name},{$set:{lastIP:IParray,lastLoginTime:loginTimearray}})
             res.render('logintest',{title:"Successful login",message:"Welcome "+name,username: res.locals.name, role: res.locals.role})
           }
           else{
