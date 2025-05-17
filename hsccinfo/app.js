@@ -19,6 +19,7 @@ var electionMetaRouter = require('./routes/electionmeta');
 var createElectionRouter = require('./routes/createelection');
 var viewElectionRouter = require('./routes/viewelection');
 var logoutRouter = require('./routes/logout');
+var dashboardRouter = require('./routes/dashboard');
 // Setting up Express app
 var app = express();
 
@@ -46,6 +47,7 @@ app.use('/logintest', loginTestRouter);
 app.use('/createElection', createElectionRouter);
 app.use('/viewElection', viewElectionRouter);
 app.use('/logout', logoutRouter);
+app.use('/dashboard', dashboardRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

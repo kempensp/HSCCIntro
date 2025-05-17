@@ -64,7 +64,7 @@ router.post('/', auth,function(req, res, next) {
             loginTimearray=loginTimearray.slice(0,5)
 
             const updateresult=await collection.updateOne({username:name},{$set:{lastIP:IParray,lastLoginTime:loginTimearray}})
-            res.render('logintest',{title:"Successful login",message:"Welcome "+name,username: res.locals.name, role: res.locals.role})
+            res.redirect('dashboard')
           }
           else{
             res.render('logintest',{title:'Login failed',message:'Login and password not found',username: res.locals.name, role: res.locals.role})
