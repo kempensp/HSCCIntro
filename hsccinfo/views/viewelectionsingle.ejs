@@ -26,7 +26,37 @@
     <h3> Opens at: <%= new Date(Electiondata.opensAt) %> </h3>
     <h3> Closes at: <%= new Date(Electiondata.closesAt) %> </h3>
 
-
+    <% if (Electiondata.owned && !Electiondata.deleted) { %>
+      <h3>Rank Candidates</h3>
+      <form method="POST" action="/viewelection/<%= Electiondata.election_id %>/reorder">
+        <ul id="sortable-options" style="list-style:none; padding-left:0; color: gold;">
+          <% (Electiondata.options || []).forEach(function(option, idx) { %>
+            <li style="margin-bottom:8px;">
+              <input type="hidden" name="options[]" value="<%= option %>" />
+              <span class="handle" style="cursor:move;">&#9776;</span> <%= option %>
+            </li>
+          <% }); %>
+        </ul>
+        <button type="submit" class="btn btn-primary mt-2">Save Order</button>
+      </form>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+      <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" />
+      <script>
+        $(function() {
+          $('#sortable-options').sortable({
+            handle: '.handle',
+            update: function(event, ui) {
+              // Update hidden inputs order
+              $('#sortable-options li').each(function(i, el) {
+                $(el).find('input').attr('name', 'options['+i+']');
+              });
+            }
+          });
+          $('#sortable-options').disableSelection();
+        });
+      </script>
+    <% } %>
 
   </body>
 </html>
