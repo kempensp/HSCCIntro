@@ -69,6 +69,7 @@
               <th>City</th>
               <th>State</th>
               <th>Zip</th>
+              <th>Change Role</th>
             </tr>
           </thead>
           <tbody>
@@ -80,6 +81,22 @@
                 <td><%= user.city %></td>
                 <td><%= user.state %></td>
                 <td><%= user.zip %></td>
+                <td>
+                  <% if (user.role !== 'super') { %>
+                    <form method="POST" action="/dashboard/changerole" style="display:inline-block;">
+                      <input type="hidden" name="username" value="<%= user.username %>">
+                      <select name="role" class="form-select form-select-sm d-inline w-auto" required>
+                        <option value="voter" <%= user.role === 'voter' ? 'selected' : '' %>>voter</option>
+                        <option value="reporter" <%= user.role === 'reporter' ? 'selected' : '' %>>reporter</option>
+                        <option value="moderator" <%= user.role === 'moderator' ? 'selected' : '' %>>moderator</option>
+                        <option value="admin" <%= user.role === 'admin' ? 'selected' : '' %>>admin</option>
+                      </select>
+                      <button type="submit" class="btn btn-sm btn-primary">Change</button>
+                    </form>
+                  <% } else { %>
+                    <span class="text-muted">super</span>
+                  <% } %>
+                </td>
               </tr>
             <% }); %>
           </tbody>
