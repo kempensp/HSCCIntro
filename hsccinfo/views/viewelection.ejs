@@ -42,5 +42,23 @@
         </table>
         </div>
 
+        <% if (ElectionsArray && ElectionsArray.length > 0) { %>
+  <div class="d-flex justify-content-between mt-3">
+    <form method="get" action="/viewelection">
+      <% /* Previous button: disables if on first page (no after param) */ %>
+      <% if (typeof after !== 'string' || !after) { %>
+        <button class="btn btn-secondary" disabled>Previous</button>
+      <% } else { %>
+        <button class="btn btn-secondary" type="submit">Previous</button>
+      <% } %>
+    </form>
+    <form method="get" action="/viewelection">
+      <% /* Next button: uses last election_id as after param */ %>
+      <input type="hidden" name="after" value="<%= ElectionsArray[ElectionsArray.length-1].election_id %>" />
+      <button class="btn btn-primary" type="submit">Next</button>
+    </form>
+  </div>
+<% } %>
+
   </body>
 </html>
