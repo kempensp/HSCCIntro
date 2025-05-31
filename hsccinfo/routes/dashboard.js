@@ -14,23 +14,46 @@ router.get('/', auth, function(req, res, next) {
     res.redirect('/logintest')
   }
   else{
-    const client=MongoClient.CreateMongoClient();
-    async function run() {
+    // If super user, get all users
+    if (res.locals.role === 'super') {
+      const client = MongoClient.CreateMongoClient();
+      async function run() {
         try {
-            // Send a ping to confirm a successful connection
-            await client.db("admin").command({ ping: 1 });
-            console.log("Pinged your deployment. You successfully connected to MongoDB!");
-            const db = client.db('Elections24');
-            const collection = db.collection('Users');
-            const result= await collection.findOne( { username: res.locals.name } )
-            console.log(result)
-            res.render('dashboard', { title: 'Dashboard',username: res.locals.name, role: res.locals.role,userinfo:result });
+          await client.db("admin").command({ ping: 1 });
+          const db = client.db('Elections24');
+          const collection = db.collection('Users');
+          const allUsers = await collection.find({}).toArray();
+          res.render('dashboard', {
+            title: 'Dashboard',
+            username: res.locals.name,
+            role: res.locals.role,
+            userinfo: allUsers.find(u => u.username === res.locals.name),
+            allUsers: allUsers
+          });
         } finally {
-        // Ensures that the client will close when you finish/error
-        await client.close();
-       }
+          await client.close();
+        }
+      }
+      run().catch(console.dir);
+    } else {
+      const client=MongoClient.CreateMongoClient();
+      async function run() {
+          try {
+              // Send a ping to confirm a successful connection
+              await client.db("admin").command({ ping: 1 });
+              console.log("Pinged your deployment. You successfully connected to MongoDB!");
+              const db = client.db('Elections24');
+              const collection = db.collection('Users');
+              const result= await collection.findOne( { username: res.locals.name } )
+              console.log(result)
+              res.render('dashboard', { title: 'Dashboard',username: res.locals.name, role: res.locals.role,userinfo:result });
+          } finally {
+          // Ensures that the client will close when you finish/error
+          await client.close();
+         }
+      }
+      run().catch(console.dir);
     }
-    run().catch(console.dir);
     }
 });
 
