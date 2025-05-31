@@ -67,13 +67,26 @@ router.post('/', auth, function(req, res, next) {
 
     //Submit post request
     APIRequests.postWithBearerToken(url, token,body)
-        .then(data => {
+        .then(async data => {
             if (process.env.CONSOLE_DEBUG=="true"){
                 console.log("REST CALL ", data);
             }
-            
             if (data.success){
-                
+              // Add election_id to ElectionVoters collection with empty votersassigned array
+              try {
+                const MongoClientLib = require("../middleware/MongoClient");
+                const client = MongoClientLib.CreateMongoClient();
+                await client.db("admin").command({ ping: 1 });
+                const db = client.db('Elections24');
+                const votersCollection = db.collection('ElectionVoters');
+                // Use the election_id returned by the API
+                if (data.election && data.election.election_id) {
+                  await votersCollection.insertOne({ election_id: data.election.election_id, votersassigned: [] });
+                }
+                await client.close();
+              } catch (err) {
+                console.error("Error adding to ElectionVoters collection:", err);
+              }
               res.render('createelection', { title: 'Created an Election Successfully',username: res.locals.name, role: res.locals.role });
             } // closes if statement
     
