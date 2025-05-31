@@ -9,11 +9,38 @@ const MongoClient=require("../middleware/MongoClient");
 
 /* GET register page. */
 router.get('/', auth,function(req, res, next) {
-  res.render('registertest', { title: 'Test Registration Page',message:'',username: res.locals.name, role: res.locals.role });
+  // Generate captcha numbers for the form
+  const captchaA = Math.floor(Math.random() * 10) + 1;
+  const captchaB = Math.floor(Math.random() * 10) + 1;
+  res.render('registertest', {
+    title: 'Test Registration Page',
+    message: '',
+    username: res.locals.name,
+    role: res.locals.role,
+    captchaA: captchaA,
+    captchaB: captchaB
+  });
 });
 
 // POST register form
 router.post('/', auth,function(req, res, next) {
+  // Captcha validation
+  const captchaA = parseInt(req.body.captchaA, 10);
+  const captchaB = parseInt(req.body.captchaB, 10);
+  const captchaAnswer = parseInt(req.body.captchaAnswer, 10);
+  if (captchaA + captchaB !== captchaAnswer) {
+    // If captcha is incorrect, re-render with a new captcha and error message
+    const newA = Math.floor(Math.random() * 10) + 1;
+    const newB = Math.floor(Math.random() * 10) + 1;
+    return res.render('registertest', {
+      title: 'Test Registration Page',
+      message: 'Captcha incorrect. Please try again.',
+      username: res.locals.name,
+      role: res.locals.role,
+      captchaA: newA,
+      captchaB: newB
+    });
+  }
   let name=req.body.username;
   const client=MongoClient.CreateMongoClient();
   let pwd=req.body.pwd;

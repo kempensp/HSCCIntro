@@ -112,6 +112,18 @@
 
 </div>
 
+<% /* Generate two random numbers for the captcha (server-side) if not provided by backend */ %>
+<% let a = (typeof captchaA !== 'undefined') ? captchaA : Math.floor(Math.random() * 10) + 1; %>
+<% let b = (typeof captchaB !== 'undefined') ? captchaB : Math.floor(Math.random() * 10) + 1; %>
+<div class="row mt-3 mb-2">
+  <div class="col">
+    <label for="captcha">What is <%= a %> + <%= b %>? (anti-bot)</label>
+    <input class="form-control" type="number" name="captchaAnswer" id="captcha" required>
+    <input type="hidden" name="captchaA" value="<%= a %>">
+    <input type="hidden" name="captchaB" value="<%= b %>">
+  </div>
+</div>
+
       <input type="submit" value="Submit form">
 
    </form>
