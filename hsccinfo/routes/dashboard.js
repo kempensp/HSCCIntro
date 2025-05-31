@@ -14,21 +14,25 @@ router.get('/', auth, function(req, res, next) {
     res.redirect('/logintest')
   }
   else{
-    // If super user, get all users
-    if (res.locals.role === 'super') {
+    // If super or admin user, get all users and all owned elections
+    if (res.locals.role === 'super' || res.locals.role === 'admin') {
       const client = MongoClient.CreateMongoClient();
       async function run() {
         try {
           await client.db("admin").command({ ping: 1 });
           const db = client.db('Elections24');
-          const collection = db.collection('Users');
-          const allUsers = await collection.find({}).toArray();
+          const usersCollection = db.collection('Users');
+          const votersCollection = db.collection('ElectionVoters');
+          const allUsers = await usersCollection.find({}).toArray();
+          // Get all owned elections from ElectionVoters
+          const ownedElections = await votersCollection.find({}).toArray();
           res.render('dashboard', {
             title: 'Dashboard',
             username: res.locals.name,
             role: res.locals.role,
             userinfo: allUsers.find(u => u.username === res.locals.name),
-            allUsers: allUsers
+            allUsers: allUsers,
+            ownedElections: ownedElections
           });
         } finally {
           await client.close();
