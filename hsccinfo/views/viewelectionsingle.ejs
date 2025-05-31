@@ -58,6 +58,31 @@
       </script>
     <% } %>
 
+    <% if ((role === 'super' || role === 'admin') && Electiondata.owned) { %>
+      <h3>Manage Voters Assigned</h3>
+      <form method="POST" action="/viewelection/<%= Electiondata.election_id %>/assignvoter" class="mb-3">
+        <div class="input-group">
+          <input type="text" name="voter" class="form-control" placeholder="Enter username to assign" required>
+          <button type="submit" class="btn btn-success">Assign Voter</button>
+        </div>
+      </form>
+      <h4>Currently Assigned Voters:</h4>
+      <ul>
+        <% (votersassigned || []).forEach(function(voter) { %>
+          <li>
+            <%= voter %>
+            <form method="POST" action="/viewelection/<%= Electiondata.election_id %>/removevoter" style="display:inline;">
+              <input type="hidden" name="voter" value="<%= voter %>">
+              <button type="submit" class="btn btn-sm btn-danger ms-2">Remove</button>
+            </form>
+          </li>
+        <% }); %>
+        <% if (!(votersassigned && votersassigned.length)) { %>
+          <li class="text-muted">No voters assigned</li>
+        <% } %>
+      </ul>
+    <% } %>
+
   </body>
 </html>
 
