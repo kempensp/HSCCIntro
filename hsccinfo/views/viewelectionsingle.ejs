@@ -26,7 +26,7 @@
     <h3> Opens at: <%= new Date(Electiondata.opensAt) %> </h3>
     <h3> Closes at: <%= new Date(Electiondata.closesAt) %> </h3>
 
-    <% if (Electiondata.owned && !Electiondata.deleted) { %>
+    <% if (Electiondata.owned && !Electiondata.deleted && votersassigned && votersassigned.includes(username)) { %>
       <h3>Rank Candidates</h3>
       <form method="POST" action="/viewelection/<%= Electiondata.election_id %>/reorder">
         <ul id="sortable-options" style="list-style:none; padding-left:0; color: gold;">
