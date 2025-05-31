@@ -26,6 +26,7 @@ router.get('/', auth, function(req, res, next) {
           const allUsers = await usersCollection.find({}).toArray();
           // Get all owned elections from ElectionVoters
           const ownedElections = await votersCollection.find({}).toArray();
+          console.log(ownedElections);
           res.render('dashboard', {
             title: 'Dashboard',
             username: res.locals.name,
