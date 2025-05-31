@@ -45,6 +45,9 @@
         <% if (ElectionsArray && ElectionsArray.length > 0) { %>
   <div class="d-flex justify-content-between mt-3">
     <form method="get" action="/viewelection">
+      <button class="btn btn-outline-secondary" type="submit" <%= (!after) ? 'disabled' : '' %>>First</button>
+    </form>
+    <form method="get" action="/viewelection">
       <% /* Previous button: disables if on first page (no after param) */ %>
       <% if (typeof after !== 'string' || !after) { %>
         <button class="btn btn-secondary" disabled>Previous</button>
