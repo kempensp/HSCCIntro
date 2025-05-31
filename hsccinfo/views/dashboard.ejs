@@ -103,5 +103,29 @@
         </table>
       </div>
     <% } %>
+
+    <% if ((role === 'super' || role === 'admin') && ownedElections && ownedElections.length > 0) { %>
+      <h2>Owned Elections</h2>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Election ID</th>
+              <th>View</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% ownedElections.forEach(function(election) { %>
+              <tr>
+                <td><%= election.election_id %></td>
+                <td>
+                  <a href="/viewelection/<%= election.election_id %>" class="btn btn-sm btn-info">View Details</a>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
   </body>
 </html>
